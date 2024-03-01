@@ -33,3 +33,8 @@ export async function GetFormStats() {
 
   return { visits, submissions, submissionRate, bouceRate };
 }
+
+export async function CreateForm(data: {
+  name: string;
+  description: string | undefined;
+}) {}

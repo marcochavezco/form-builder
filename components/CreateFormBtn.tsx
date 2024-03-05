@@ -27,11 +27,12 @@ export default function CreateFormBtn() {
 
   async function onSubmit(values: formSchemaType) {
     try {
-      await CreateForm(values);
+      const formId = await CreateForm(values);
       toast({
         title: 'Success',
         description: 'Form created succesfully',
       });
+      console.log('FORM ID', formId);
     } catch (error) {
       toast({
         title: 'Error',

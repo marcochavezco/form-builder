@@ -17,12 +17,12 @@ export async function GetFormStats() {
     },
     _sum: {
       visits: true,
-      submission: true,
+      submissions: true,
     },
   });
 
   const visits = stats?._sum.visits || 0;
-  const submissions = stats?._sum.submission || 0;
+  const submissions = stats?._sum.submissions || 0;
 
   let submissionRate = 0;
 
@@ -40,5 +40,25 @@ export async function CreateForm(data: formSchemaType) {
   if (!validation.success) {
     throw new Error('Invalid data');
   }
-  console.log('NAME ON SERVER', data.name);
+
+  const user = await currentUser();
+  if (!user) {
+    throw new UserNotFoundErr();
+  }
+
+  const { name, description } = data;
+
+  const form = await prisma.form.create({
+    data: {
+      userId: user.id,
+      name,
+      description,
+    },
+  });
+
+  if (!form) {
+    throw new Error('Somenthing went wrong');
+  }
+
+  return form.id;
 }

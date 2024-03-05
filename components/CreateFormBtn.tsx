@@ -1,8 +1,10 @@
 'use client';
 
+import { CreateForm } from '@/actions/form';
 import { formSchema, formSchemaType } from '@/schemas/form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
+import { BsFileEarmarkPlus } from 'react-icons/bs';
 import { ImSpinner2 } from 'react-icons/im';
 import { Button } from './ui/button';
 import {
@@ -18,7 +20,6 @@ import { Form, FormControl, FormField, FormItem, FormLabel } from './ui/form';
 import { Input } from './ui/input';
 import { Textarea } from './ui/textarea';
 import { toast } from './ui/use-toast';
-import { CreateForm } from '@/actions/form';
 
 export default function CreateFormBtn() {
   const form = useForm<formSchemaType>({
@@ -45,7 +46,15 @@ export default function CreateFormBtn() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button>Create new form</Button>
+        <Button
+          variant={'outline'}
+          className='group border border-primary/20 h-[190px] items-center justify-center flex flex-col hover:border-primary hover:cursor-pointer border-dashed gap-4'
+        >
+          <BsFileEarmarkPlus className='h-8 w-8 text-muted-foreground group-hover:text-primary' />
+          <p className='font-bold text-xl to-muted-foreground group-hover:text-primary'>
+            Create new form
+          </p>
+        </Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
